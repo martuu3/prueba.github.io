@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Malla Curricular Interactiva</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Malla Curricular de Matronería</h1>
+        <p>Marca tus ramos aprobados y ve cómo se habilitan los siguientes.</p>
+    </header>
+
+    <main id="malla-container">
+        </main>
+
+    <div id="course-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modal-course-name"></h2>
+            <p><strong>Código:</strong> <span id="modal-course-id"></span></p>
+            <p><strong>Semestre:</strong> <span id="modal-course-semestre"></span></p>
+            <p><strong>Prerrequisitos:</strong> <span id="modal-course-prerrequisitos"></span></p>
+            <p id="modal-course-description"></p>
+            <div class="modal-actions">
+                <button id="mark-as-aprobado">Marcar como Aprobado</button>
+                <button id="mark-as-cursando">Marcar como Cursando</button>
+                <button id="mark-as-pendiente">Marcar como Pendiente</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
