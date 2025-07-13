@@ -1,0 +1,314 @@
+/* Importar fuentes de Google Fonts para un diseño más pulcro */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #F8F4FF; /* Lavanda muy claro */
+    color: #4A4A6A; /* Morado oscuro para el texto principal */
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #6A057F; /* Morado intenso para el título */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8em;
+    margin-bottom: 5px;
+}
+
+header p {
+    font-size: 1.1em;
+    color: #8C479B;
+}
+
+#malla-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    padding: 0 10px;
+}
+
+.semestre {
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(106, 5, 127, 0.12); /* Sombra con toque morado */
+    padding: 30px;
+    width: 320px; /* Ajusta según tus preferencias */
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #E0BBE4; /* Borde suave */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.semestre:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(106, 5, 127, 0.18);
+}
+
+.semestre h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: #8C479B; /* Morado medio */
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #F1E5F8; /* Línea divisoria más clara */
+    padding-bottom: 15px;
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.course-card {
+    font-family: 'Poppins', sans-serif;
+    background-color: #FDFBFF; /* Casi blanco */
+    border: 1px solid #ECCAFB; /* Rosado/morado muy claro */
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    width: calc(100% - 40px); /* Ajusta por padding */
+    text-align: center;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    font-weight: 600;
+    color: #6A057F; /* Morado principal */
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.course-card:hover:not(.course-disabled) {
+    transform: translateY(-7px);
+    background-color: #F5E8FF; /* Morado claro en hover */
+    box-shadow: 0 8px 18px rgba(106, 5, 127, 0.2);
+}
+
+/* Estilos para los estados del curso */
+.course-aprobado {
+    background-color: #E6FFEC; /* Verde muy suave */
+    border-color: #69BB7B; /* Verde un poco más oscuro */
+    color: #3C763D; /* Verde oscuro para texto */
+}
+
+.course-cursando {
+    background-color: #FFF6E5; /* Naranja muy suave */
+    border-color: #FFC069; /* Naranja un poco más oscuro */
+    color: #8A6D3B; /* Naranja oscuro para texto */
+}
+
+.course-pendiente {
+    background-color: #FDE8ED; /* Rosado muy suave */
+    border-color: #E293B3; /* Rosado un poco más oscuro */
+    color: #A94442; /* Rojo oscuro para texto (para indicar algo pendiente/no logrado) */
+}
+
+/* Estilo para cursos deshabilitados */
+.course-disabled {
+    background-color: #EAEAEA; /* Gris claro */
+    color: #999;
+    border-color: #C0C0C0;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+    pointer-events: auto; /* Permite clicks para el alert, pero no para abrir modal */
+    font-weight: normal;
+}
+
+.course-disabled:hover {
+    transform: none;
+    background-color: #EAEAEA;
+    box-shadow: none;
+}
+
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px); /* Mayor desenfoque */
+    display: flex; /* Usar flexbox para centrar */
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 35px;
+    border: 1px solid #E0BBE4;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 650px; /* Un poco más grande para descripciones */
+    position: relative;
+    box-shadow: 0 12px 30px rgba(106, 5, 127, 0.25);
+    animation: fadeInScale 0.4s ease-out forwards; /* Animación de aparición */
+    transform: scale(0.9); /* Inicio de la escala */
+    opacity: 0; /* Inicio de la opacidad */
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.close-button {
+    color: #8C479B;
+    position: absolute; /* Posicionamiento absoluto */
+    top: 15px;
+    right: 20px;
+    font-size: 36px; /* Más grande */
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #6A057F;
+}
+
+.modal-content h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: #6A057F;
+    margin-bottom: 20px;
+    font-size: 2em;
+    font-weight: 700;
+    border-bottom: 1px solid #F1E5F8;
+    padding-bottom: 10px;
+}
+
+.modal-content p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    color: #555;
+    font-size: 1.05em;
+}
+
+.modal-content strong {
+    color: #6A057F;
+    font-weight: 600;
+}
+
+.modal-actions {
+    margin-top: 30px;
+    display: flex; /* Usar flexbox para alinear botones */
+    justify-content: center;
+    gap: 15px; /* Espacio entre botones */
+}
+
+.modal-actions button {
+    padding: 14px 25px;
+    border: none;
+    border-radius: 30px; /* Bordes más redondeados */
+    cursor: pointer;
+    font-size: 1.05em;
+    font-weight: 600;
+    color: white;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
+    min-width: 160px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#mark-as-aprobado {
+    background-color: #69BB7B; /* Verde */
+}
+#mark-as-aprobado:hover {
+    background-color: #5AA06B;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 150, 0, 0.2);
+}
+
+#mark-as-cursando {
+    background-color: #FFC069; /* Naranja */
+}
+#mark-as-cursando:hover {
+    background-color: #FFB055;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(255, 160, 0, 0.2);
+}
+
+#mark-as-pendiente {
+    background-color: #E293B3; /* Rosado */
+}
+#mark-as-pendiente:hover {
+    background-color: #D37BA0;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(255, 100, 150, 0.2);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    header h1 {
+        font-size: 2.2em;
+    }
+    .semestre {
+        width: calc(100% - 20px); /* Ocupa casi todo el ancho con padding */
+        padding: 20px;
+    }
+    .semestre h2 {
+        font-size: 1.6em;
+    }
+    .course-card {
+        width: calc(100% - 30px);
+        padding: 12px 15px;
+    }
+    .modal-content {
+        margin: 5% auto;
+        width: 95%;
+        padding: 25px;
+    }
+    .modal-actions {
+        flex-direction: column; /* Botones apilados en móvil */
+        gap: 10px;
+    }
+    .modal-actions button {
+        width: 100%;
+        margin: 0; /* Quitar margen horizontal */
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+    header p {
+        font-size: 0.9em;
+    }
+    .semestre h2 {
+        font-size: 1.4em;
+    }
+    .course-card {
+        font-size: 0.9em;
+    }
+    .modal-content h2 {
+        font-size: 1.5em;
+    }
+    .modal-content p {
+        font-size: 0.9em;
+    }
+    .modal-actions button {
+        font-size: 0.9em;
+        padding: 10px 15px;
+    }
+}
